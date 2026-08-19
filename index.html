@@ -240,29 +240,52 @@
       position:absolute;
       inset:26px;
       border-radius:26px;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
-      color:var(--text);
       z-index:1;
-      padding:16px;
+      overflow:hidden;
+      pointer-events:none;
+      opacity:0;
+      transform:scale(.28);
+      background:
+        radial-gradient(circle at 50% 50%, rgba(255,255,248,1) 0%, rgba(255,247,210,.98) 10%, rgba(255,229,156,.98) 18%, rgba(255,198,88,.90) 32%, rgba(255,154,42,.54) 46%, rgba(255,124,18,.20) 60%, transparent 76%),
+        radial-gradient(circle at 50% 64%, rgba(255,239,190,.40), transparent 60%);
+      filter:blur(1px) saturate(1.15);
+      transition:opacity .18s ease;
+      box-shadow:0 0 60px rgba(255,205,98,.18) inset;
     }
 
-    .gate-center .mini{
-      letter-spacing:3px;
-      font-size:10px;
-      text-transform:uppercase;
-      color:#f2d7a0;
-      margin-bottom:10px;
+    .gate-center::before,
+    .gate-center::after{
+      content:"";
+      position:absolute;
+      left:50%;top:50%;
+      transform:translate(-50%,-50%);
+      pointer-events:none;
+      opacity:.95;
     }
 
-    .gate-center .welcome{
-      margin-top:10px;
-      font-size:15px;
-      color:#f7e8cb;
-      font-style:italic;
+    .gate-center::before{
+      width:360%;
+      height:10px;
+      background:linear-gradient(90deg, transparent, rgba(255,244,194,.95), rgba(255,215,123,.95), rgba(255,244,194,.95), transparent);
+      filter:blur(9px);
+    }
+
+    .gate-center::after{
+      width:14px;
+      height:260%;
+      background:linear-gradient(180deg, transparent, rgba(255,244,194,.96), rgba(255,215,123,.92), rgba(255,244,194,.96), transparent);
+      filter:blur(10px);
+    }
+
+    .opening .gate-center{
+      animation:innerSun 1.85s cubic-bezier(.16,.78,.2,1) forwards;
+    }
+
+    @keyframes innerSun{
+      0%{opacity:0;transform:scale(.18)}
+      18%{opacity:.88}
+      55%{opacity:1;transform:scale(1.55)}
+      100%{opacity:.96;transform:scale(2.45)}
     }
 
     .gate-door{
@@ -592,41 +615,49 @@
       position:absolute;
       left:50%;
       top:50%;
-      width:34%;
-      height:62%;
-      transform:translate(-50%,-50%) scale(.15);
+      width:26%;
+      height:42%;
+      transform:translate(-50%,-50%) scale(.08);
       border-radius:50%;
       z-index:2;
       opacity:0;
       pointer-events:none;
       background:radial-gradient(ellipse at center,
-        rgba(255,255,235,.98) 0%,
-        rgba(255,237,177,.92) 20%,
-        rgba(255,196,76,.62) 47%,
-        rgba(244,159,34,.24) 67%,
-        transparent 78%);
-      filter:blur(6px);
+        rgba(255,255,255,1) 0%,
+        rgba(255,249,220,1) 14%,
+        rgba(255,236,176,.98) 28%,
+        rgba(255,210,118,.92) 42%,
+        rgba(255,173,55,.58) 58%,
+        rgba(244,136,20,.24) 73%,
+        transparent 84%);
+      filter:blur(1px);
       mix-blend-mode:screen;
+      box-shadow:0 0 45px rgba(255,231,160,.65), 0 0 120px rgba(255,199,76,.38);
     }
     .gate-light::before,.gate-light::after{
       content:"";
       position:absolute;
       left:50%;top:50%;
       transform:translate(-50%,-50%);
-      background:linear-gradient(90deg,transparent,rgba(255,239,176,.62),transparent);
-      filter:blur(3px);
+      filter:blur(7px);
     }
-    .gate-light::before{width:270%;height:4px}
-    .gate-light::after{width:4px;height:190%}
-    .opening .gate-light{animation:goldBurst 1.45s cubic-bezier(.18,.75,.2,1) forwards}
+    .gate-light::before{
+      width:460%;height:16px;
+      background:linear-gradient(90deg,transparent,rgba(255,244,194,.98),rgba(255,220,140,.98),rgba(255,244,194,.98),transparent);
+    }
+    .gate-light::after{
+      width:16px;height:310%;
+      background:linear-gradient(180deg,transparent,rgba(255,244,194,.98),rgba(255,220,140,.98),rgba(255,244,194,.98),transparent);
+    }
+    .opening .gate-light{animation:goldBurst 1.9s cubic-bezier(.14,.74,.18,1) forwards}
     @keyframes goldBurst{
-      0%{opacity:0;transform:translate(-50%,-50%) scale(.12)}
-      25%{opacity:.72}
-      70%{opacity:1;transform:translate(-50%,-50%) scale(1.55)}
-      100%{opacity:.35;transform:translate(-50%,-50%) scale(2.05)}
+      0%{opacity:0;transform:translate(-50%,-50%) scale(.06)}
+      12%{opacity:.9}
+      52%{opacity:1;transform:translate(-50%,-50%) scale(2.1)}
+      100%{opacity:.45;transform:translate(-50%,-50%) scale(3.6)}
     }
     .opening .cover-frame{
-      box-shadow:0 22px 50px rgba(58,18,18,.22),0 0 70px rgba(255,192,64,.34);
+      box-shadow:0 22px 50px rgba(58,18,18,.22),0 0 120px rgba(255,205,84,.65), 0 0 180px rgba(255,233,162,.25);
     }
 
     #petals{
@@ -676,13 +707,7 @@
       <div class="floral-corner tl"><svg viewBox="0 0 140 140"><path d="M16 50 C 34 40, 38 22, 56 18"/><path d="M22 68 C 42 58, 52 42, 70 34"/><path d="M28 88 C 52 80, 66 62, 84 46"/><path d="M22 110 C 48 100, 72 88, 102 68"/><ellipse class="petal-fill" cx="36" cy="40" rx="8" ry="15" transform="rotate(-30 36 40)"/><ellipse class="petal-fill" cx="58" cy="22" rx="8" ry="14" transform="rotate(18 58 22)"/><ellipse class="petal-fill" cx="66" cy="48" rx="8" ry="14" transform="rotate(-18 66 48)"/><circle cx="88" cy="66" r="9"/><path d="M88 57 C95 60, 100 64, 101 71"/><path d="M79 69 C83 74, 88 77, 95 78"/></svg></div>
       <div class="floral-corner br"><svg viewBox="0 0 140 140"><path d="M16 50 C 34 40, 38 22, 56 18"/><path d="M22 68 C 42 58, 52 42, 70 34"/><path d="M28 88 C 52 80, 66 62, 84 46"/><path d="M22 110 C 48 100, 72 88, 102 68"/><ellipse class="petal-fill" cx="36" cy="40" rx="8" ry="15" transform="rotate(-30 36 40)"/><ellipse class="petal-fill" cx="58" cy="22" rx="8" ry="14" transform="rotate(18 58 22)"/><ellipse class="petal-fill" cx="66" cy="48" rx="8" ry="14" transform="rotate(-18 66 48)"/><circle cx="88" cy="66" r="9"/><path d="M88 57 C95 60, 100 64, 101 71"/><path d="M79 69 C83 74, 88 77, 95 78"/></svg></div>
 
-      <div class="gate-center">
-        <div class="mini">Ring Ceremony Invitation</div>
-        <h1 class="script">Spandan</h1>
-        <div class="and">&</div>
-        <h1 class="script">Rajshree</h1>
-        <div class="welcome">A beautiful beginning is about to unfold</div>
-      </div>
+      <div class="gate-center"></div>
 
       <div class="gate-door left-door"><i class="knob"></i></div>
       <div class="gate-door right-door"><i class="knob"></i></div>
@@ -714,7 +739,7 @@
         </div>
 
         <div class="date-line" style="margin-top:20px;">
-          <span>12 September 2026</span>
+          <span>13 September 2026</span>
           <span>•</span>
           <span>10 AM onwards</span>
         </div>
@@ -730,8 +755,8 @@
       <div class="inner">
         <div class="halo"><span>✦</span></div>
         <div class="eyebrow">Save the Date</div>
-        <h2 class="serif-title" style="font-size:42px">12th September</h2>
-        <div class="copy muted">Saturday • 10 AM onwards • 2026</div>
+        <h2 class="serif-title" style="font-size:42px">13th September</h2>
+        <div class="copy muted">Sunday • 10 AM onwards • 2026</div>
 
         <div class="details-grid">
           <div class="detail-chip">
@@ -740,7 +765,7 @@
           </div>
           <div class="detail-chip">
             <h4>When</h4>
-            <p>12 September 2026, Saturday<br/>10 AM onwards</p>
+            <p>13 September 2026, Sunday<br/>10 AM onwards</p>
           </div>
         </div>
 
@@ -868,7 +893,7 @@
     setTimeout(finishIntro, 2200);
   }
 
-  const targetDate = new Date('2026-09-12T10:00:00+05:30');
+  const targetDate = new Date('2026-09-13T10:00:00+05:30');
   function updateCountdown(){
     let diff = Math.max(0, targetDate - new Date());
     const d = Math.floor(diff / 86400000); diff %= 86400000;
