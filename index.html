@@ -243,77 +243,68 @@
       z-index:1;
       overflow:hidden;
       pointer-events:none;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
       opacity:0;
-      transform:scale(.72);
-      background:
-        radial-gradient(circle at 50% 50%, rgba(255,255,255,.98) 0%, rgba(255,251,229,.98) 12%, rgba(255,235,178,.92) 28%, rgba(255,205,112,.68) 48%, rgba(255,166,64,.30) 66%, transparent 82%);
-      filter:blur(3px) saturate(1.05);
-      will-change:transform,opacity,filter;
+      transform:scale(.96);
+      transition:opacity .35s ease, transform .55s ease;
     }
 
-    .gate-center::before,
-    .gate-center::after{
+    .gate-preview{
+      width:100%;
+      max-width:250px;
+      background:linear-gradient(180deg, rgba(126,20,25,.98), rgba(95,14,18,.98));
+      border:1px solid rgba(232,202,133,.34);
+      border-radius:24px;
+      padding:22px 18px;
+      box-shadow:0 16px 34px rgba(0,0,0,.15), inset 0 0 0 1px rgba(255,255,255,.05);
+      text-align:center;
+      color:var(--text);
+      position:relative;
+    }
+
+    .gate-preview::before{
       content:"";
       position:absolute;
-      left:50%;top:50%;
-      transform:translate(-50%,-50%);
+      inset:10px;
+      border:1px solid rgba(238,208,141,.18);
+      border-radius:18px;
       pointer-events:none;
-      opacity:0;
     }
 
-    .gate-center::before{
-      width:330%;
-      height:130%;
-      background:conic-gradient(from 0deg at 50% 50%,
-        transparent 0deg 18deg,
-        rgba(255,238,186,.20) 28deg,
-        transparent 38deg 72deg,
-        rgba(255,225,157,.16) 84deg,
-        transparent 96deg 138deg,
-        rgba(255,242,200,.20) 150deg,
-        transparent 162deg 212deg,
-        rgba(255,220,142,.14) 224deg,
-        transparent 236deg 292deg,
-        rgba(255,240,195,.18) 304deg,
-        transparent 318deg 360deg);
-      filter:blur(14px);
+    .gate-preview .eyebrow{
+      margin-bottom:8px;
+      font-size:10px;
+      letter-spacing:2.6px;
     }
 
-    .gate-center::after{
-      width:240%;
-      height:240%;
-      border-radius:50%;
-      background:radial-gradient(circle, rgba(255,255,255,.75) 0%, rgba(255,243,205,.34) 28%, rgba(255,217,151,.12) 52%, transparent 72%);
-      filter:blur(18px);
+    .gate-preview .serif-title{
+      font-size:28px;
+      margin-top:4px;
+    }
+
+    .gate-preview .script.small{
+      font-size:34px;
+      margin:6px 0;
+    }
+
+    .gate-preview .and{
+      font-size:20px;
+      margin:0;
+    }
+
+    .gate-preview .copy{
+      font-size:12px;
+      line-height:1.65;
+      margin-top:12px;
+      color:#f8e7c7;
     }
 
     .opening .gate-center{
-      animation:innerSun 2.35s cubic-bezier(.22,.65,.25,1) forwards;
-    }
-    .opening .gate-center::before{
-      animation:rayBloom 2.15s cubic-bezier(.22,.65,.25,1) .18s forwards;
-    }
-    .opening .gate-center::after{
-      animation:softAura 2.2s ease-out .08s forwards;
-    }
-
-    @keyframes innerSun{
-      0%{opacity:0;transform:scale(.72);filter:blur(6px) saturate(1)}
-      18%{opacity:.28}
-      45%{opacity:.72;transform:scale(1.02);filter:blur(4px) saturate(1.03)}
-      76%{opacity:.96;transform:scale(1.28);filter:blur(3px) saturate(1.06)}
-      100%{opacity:1;transform:scale(1.45);filter:blur(4px) saturate(1.05)}
-    }
-    @keyframes rayBloom{
-      0%{opacity:0;transform:translate(-50%,-50%) scale(.72) rotate(0deg)}
-      38%{opacity:.22}
-      72%{opacity:.48}
-      100%{opacity:.34;transform:translate(-50%,-50%) scale(1.08) rotate(5deg)}
-    }
-    @keyframes softAura{
-      0%{opacity:0;transform:translate(-50%,-50%) scale(.72)}
-      46%{opacity:.42}
-      100%{opacity:.62;transform:translate(-50%,-50%) scale(1.18)}
+      opacity:1;
+      transform:scale(1);
     }
 
     .gate-door{
@@ -752,7 +743,17 @@
       <div class="floral-corner tl"><svg viewBox="0 0 140 140"><path d="M16 50 C 34 40, 38 22, 56 18"/><path d="M22 68 C 42 58, 52 42, 70 34"/><path d="M28 88 C 52 80, 66 62, 84 46"/><path d="M22 110 C 48 100, 72 88, 102 68"/><ellipse class="petal-fill" cx="36" cy="40" rx="8" ry="15" transform="rotate(-30 36 40)"/><ellipse class="petal-fill" cx="58" cy="22" rx="8" ry="14" transform="rotate(18 58 22)"/><ellipse class="petal-fill" cx="66" cy="48" rx="8" ry="14" transform="rotate(-18 66 48)"/><circle cx="88" cy="66" r="9"/><path d="M88 57 C95 60, 100 64, 101 71"/><path d="M79 69 C83 74, 88 77, 95 78"/></svg></div>
       <div class="floral-corner br"><svg viewBox="0 0 140 140"><path d="M16 50 C 34 40, 38 22, 56 18"/><path d="M22 68 C 42 58, 52 42, 70 34"/><path d="M28 88 C 52 80, 66 62, 84 46"/><path d="M22 110 C 48 100, 72 88, 102 68"/><ellipse class="petal-fill" cx="36" cy="40" rx="8" ry="15" transform="rotate(-30 36 40)"/><ellipse class="petal-fill" cx="58" cy="22" rx="8" ry="14" transform="rotate(18 58 22)"/><ellipse class="petal-fill" cx="66" cy="48" rx="8" ry="14" transform="rotate(-18 66 48)"/><circle cx="88" cy="66" r="9"/><path d="M88 57 C95 60, 100 64, 101 71"/><path d="M79 69 C83 74, 88 77, 95 78"/></svg></div>
 
-      <div class="gate-center"></div>
+      <div class="gate-center">
+        <div class="gate-preview">
+          <div class="eyebrow">A Special Celebration</div>
+          <h2 class="serif-title">You Are Invited</h2>
+          <div class="thin-divider"></div>
+          <div class="script small">Spandan</div>
+          <div class="and">&</div>
+          <div class="script small">Rajshree</div>
+          <div class="copy">Join us as two hearts celebrate a beautiful promise, surrounded by love, blessings, and joyful togetherness.</div>
+        </div>
+      </div>
 
       <div class="gate-door left-door"><i class="knob"></i></div>
       <div class="gate-door right-door"><i class="knob"></i></div>
@@ -929,7 +930,7 @@
     setTimeout(() => gateStage.classList.add('opening'), 380);
 
     // Once the doors open, remove the intro and reveal page 2.
-    setTimeout(finishIntro, 1750);
+    setTimeout(finishIntro, 2300);
   }
 
   const targetDate = new Date('2026-09-13T10:00:00+05:30');
