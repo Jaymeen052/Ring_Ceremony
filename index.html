@@ -640,6 +640,8 @@
       pointer-events:none;
     }
     .gate-light{
+      display:none;
+
       position:absolute;
       left:50%;
       top:50%;
@@ -746,7 +748,6 @@
   <section class="screen active" id="screen-1">
     <div class="cover-stage animate-in" id="gateStage">
       <div class="cover-frame"></div>
-      <div class="gate-light"></div>
 
       <div class="floral-corner tl"><svg viewBox="0 0 140 140"><path d="M16 50 C 34 40, 38 22, 56 18"/><path d="M22 68 C 42 58, 52 42, 70 34"/><path d="M28 88 C 52 80, 66 62, 84 46"/><path d="M22 110 C 48 100, 72 88, 102 68"/><ellipse class="petal-fill" cx="36" cy="40" rx="8" ry="15" transform="rotate(-30 36 40)"/><ellipse class="petal-fill" cx="58" cy="22" rx="8" ry="14" transform="rotate(18 58 22)"/><ellipse class="petal-fill" cx="66" cy="48" rx="8" ry="14" transform="rotate(-18 66 48)"/><circle cx="88" cy="66" r="9"/><path d="M88 57 C95 60, 100 64, 101 71"/><path d="M79 69 C83 74, 88 77, 95 78"/></svg></div>
       <div class="floral-corner br"><svg viewBox="0 0 140 140"><path d="M16 50 C 34 40, 38 22, 56 18"/><path d="M22 68 C 42 58, 52 42, 70 34"/><path d="M28 88 C 52 80, 66 62, 84 46"/><path d="M22 110 C 48 100, 72 88, 102 68"/><ellipse class="petal-fill" cx="36" cy="40" rx="8" ry="15" transform="rotate(-30 36 40)"/><ellipse class="petal-fill" cx="58" cy="22" rx="8" ry="14" transform="rotate(18 58 22)"/><ellipse class="petal-fill" cx="66" cy="48" rx="8" ry="14" transform="rotate(-18 66 48)"/><circle cx="88" cy="66" r="9"/><path d="M88 57 C95 60, 100 64, 101 71"/><path d="M79 69 C83 74, 88 77, 95 78"/></svg></div>
@@ -803,7 +804,7 @@
           </div>
           <div class="detail-chip celebration-note">
             <h4>Celebration Note</h4>
-            <p>Join us for family blessings, the ring exchange, joyful moments and a warm celebration together.</p>
+            <p>"Written in the stars, sealed with a ring—join us as our greatest chapter begins!"</p>
           </div>
         </div>
 
@@ -927,8 +928,8 @@
     // Gate begins opening automatically.
     setTimeout(() => gateStage.classList.add('opening'), 380);
 
-    // Once the light burst and doors are open, remove the intro completely.
-    setTimeout(finishIntro, 2850);
+    // Once the doors open, remove the intro and reveal page 2.
+    setTimeout(finishIntro, 1750);
   }
 
   const targetDate = new Date('2026-09-13T10:00:00+05:30');
