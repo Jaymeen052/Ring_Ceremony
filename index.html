@@ -244,13 +244,11 @@
       overflow:hidden;
       pointer-events:none;
       opacity:0;
-      transform:scale(.28);
+      transform:scale(.72);
       background:
-        radial-gradient(circle at 50% 50%, rgba(255,255,248,1) 0%, rgba(255,247,210,.98) 10%, rgba(255,229,156,.98) 18%, rgba(255,198,88,.90) 32%, rgba(255,154,42,.54) 46%, rgba(255,124,18,.20) 60%, transparent 76%),
-        radial-gradient(circle at 50% 64%, rgba(255,239,190,.40), transparent 60%);
-      filter:blur(1px) saturate(1.15);
-      transition:opacity .18s ease;
-      box-shadow:0 0 60px rgba(255,205,98,.18) inset;
+        radial-gradient(circle at 50% 50%, rgba(255,255,255,.98) 0%, rgba(255,251,229,.98) 12%, rgba(255,235,178,.92) 28%, rgba(255,205,112,.68) 48%, rgba(255,166,64,.30) 66%, transparent 82%);
+      filter:blur(3px) saturate(1.05);
+      will-change:transform,opacity,filter;
     }
 
     .gate-center::before,
@@ -260,32 +258,62 @@
       left:50%;top:50%;
       transform:translate(-50%,-50%);
       pointer-events:none;
-      opacity:.95;
+      opacity:0;
     }
 
     .gate-center::before{
-      width:360%;
-      height:10px;
-      background:linear-gradient(90deg, transparent, rgba(255,244,194,.95), rgba(255,215,123,.95), rgba(255,244,194,.95), transparent);
-      filter:blur(9px);
+      width:330%;
+      height:130%;
+      background:conic-gradient(from 0deg at 50% 50%,
+        transparent 0deg 18deg,
+        rgba(255,238,186,.20) 28deg,
+        transparent 38deg 72deg,
+        rgba(255,225,157,.16) 84deg,
+        transparent 96deg 138deg,
+        rgba(255,242,200,.20) 150deg,
+        transparent 162deg 212deg,
+        rgba(255,220,142,.14) 224deg,
+        transparent 236deg 292deg,
+        rgba(255,240,195,.18) 304deg,
+        transparent 318deg 360deg);
+      filter:blur(14px);
     }
 
     .gate-center::after{
-      width:14px;
-      height:260%;
-      background:linear-gradient(180deg, transparent, rgba(255,244,194,.96), rgba(255,215,123,.92), rgba(255,244,194,.96), transparent);
-      filter:blur(10px);
+      width:240%;
+      height:240%;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(255,255,255,.75) 0%, rgba(255,243,205,.34) 28%, rgba(255,217,151,.12) 52%, transparent 72%);
+      filter:blur(18px);
     }
 
     .opening .gate-center{
-      animation:innerSun 1.85s cubic-bezier(.16,.78,.2,1) forwards;
+      animation:innerSun 2.35s cubic-bezier(.22,.65,.25,1) forwards;
+    }
+    .opening .gate-center::before{
+      animation:rayBloom 2.15s cubic-bezier(.22,.65,.25,1) .18s forwards;
+    }
+    .opening .gate-center::after{
+      animation:softAura 2.2s ease-out .08s forwards;
     }
 
     @keyframes innerSun{
-      0%{opacity:0;transform:scale(.18)}
-      18%{opacity:.88}
-      55%{opacity:1;transform:scale(1.55)}
-      100%{opacity:.96;transform:scale(2.45)}
+      0%{opacity:0;transform:scale(.72);filter:blur(6px) saturate(1)}
+      18%{opacity:.28}
+      45%{opacity:.72;transform:scale(1.02);filter:blur(4px) saturate(1.03)}
+      76%{opacity:.96;transform:scale(1.28);filter:blur(3px) saturate(1.06)}
+      100%{opacity:1;transform:scale(1.45);filter:blur(4px) saturate(1.05)}
+    }
+    @keyframes rayBloom{
+      0%{opacity:0;transform:translate(-50%,-50%) scale(.72) rotate(0deg)}
+      38%{opacity:.22}
+      72%{opacity:.48}
+      100%{opacity:.34;transform:translate(-50%,-50%) scale(1.08) rotate(5deg)}
+    }
+    @keyframes softAura{
+      0%{opacity:0;transform:translate(-50%,-50%) scale(.72)}
+      46%{opacity:.42}
+      100%{opacity:.62;transform:translate(-50%,-50%) scale(1.18)}
     }
 
     .gate-door{
@@ -298,7 +326,7 @@
       border:1px solid rgba(225,190,111,.42);
       z-index:3;
       overflow:hidden;
-      transition:transform 1.5s cubic-bezier(.2,.78,.2,1);
+      transition:transform 2.05s cubic-bezier(.22,.68,.24,1);
       box-shadow:inset 0 0 0 1px rgba(255,255,255,.06);
     }
 
@@ -615,49 +643,65 @@
       position:absolute;
       left:50%;
       top:50%;
-      width:26%;
-      height:42%;
-      transform:translate(-50%,-50%) scale(.08);
-      border-radius:50%;
+      width:18%;
+      height:46%;
+      transform:translate(-50%,-50%) scale(.55);
+      border-radius:48%;
       z-index:2;
       opacity:0;
       pointer-events:none;
       background:radial-gradient(ellipse at center,
-        rgba(255,255,255,1) 0%,
-        rgba(255,249,220,1) 14%,
-        rgba(255,236,176,.98) 28%,
-        rgba(255,210,118,.92) 42%,
-        rgba(255,173,55,.58) 58%,
-        rgba(244,136,20,.24) 73%,
+        rgba(255,255,255,.98) 0%,
+        rgba(255,252,235,.92) 20%,
+        rgba(255,237,190,.78) 42%,
+        rgba(255,210,132,.42) 64%,
         transparent 84%);
-      filter:blur(1px);
+      filter:blur(8px);
       mix-blend-mode:screen;
-      box-shadow:0 0 45px rgba(255,231,160,.65), 0 0 120px rgba(255,199,76,.38);
+      will-change:transform,opacity,filter;
     }
     .gate-light::before,.gate-light::after{
       content:"";
       position:absolute;
       left:50%;top:50%;
       transform:translate(-50%,-50%);
-      filter:blur(7px);
+      opacity:0;
+      border-radius:50%;
     }
     .gate-light::before{
-      width:460%;height:16px;
-      background:linear-gradient(90deg,transparent,rgba(255,244,194,.98),rgba(255,220,140,.98),rgba(255,244,194,.98),transparent);
+      width:460%;height:22%;
+      background:radial-gradient(ellipse, rgba(255,247,210,.46) 0%, rgba(255,221,150,.18) 38%, transparent 70%);
+      filter:blur(16px);
     }
     .gate-light::after{
-      width:16px;height:310%;
-      background:linear-gradient(180deg,transparent,rgba(255,244,194,.98),rgba(255,220,140,.98),rgba(255,244,194,.98),transparent);
+      width:170%;height:330%;
+      background:radial-gradient(ellipse, rgba(255,250,222,.32) 0%, rgba(255,214,137,.12) 44%, transparent 72%);
+      filter:blur(20px);
     }
-    .opening .gate-light{animation:goldBurst 1.9s cubic-bezier(.14,.74,.18,1) forwards}
-    @keyframes goldBurst{
-      0%{opacity:0;transform:translate(-50%,-50%) scale(.06)}
-      12%{opacity:.9}
-      52%{opacity:1;transform:translate(-50%,-50%) scale(2.1)}
-      100%{opacity:.45;transform:translate(-50%,-50%) scale(3.6)}
+    .opening .gate-light{animation:goldBloom 2.35s cubic-bezier(.22,.65,.25,1) forwards}
+    .opening .gate-light::before{animation:horizontalAura 2.2s ease-out .12s forwards}
+    .opening .gate-light::after{animation:verticalAura 2.25s ease-out .18s forwards}
+
+    @keyframes goldBloom{
+      0%{opacity:0;transform:translate(-50%,-50%) scale(.55);filter:blur(12px)}
+      24%{opacity:.34}
+      52%{opacity:.70;transform:translate(-50%,-50%) scale(.95);filter:blur(10px)}
+      80%{opacity:.94;transform:translate(-50%,-50%) scale(1.28);filter:blur(9px)}
+      100%{opacity:.78;transform:translate(-50%,-50%) scale(1.48);filter:blur(10px)}
+    }
+    @keyframes horizontalAura{
+      0%{opacity:0;transform:translate(-50%,-50%) scaleX(.7)}
+      55%{opacity:.38}
+      100%{opacity:.24;transform:translate(-50%,-50%) scaleX(1.08)}
+    }
+    @keyframes verticalAura{
+      0%{opacity:0;transform:translate(-50%,-50%) scaleY(.7)}
+      55%{opacity:.30}
+      100%{opacity:.20;transform:translate(-50%,-50%) scaleY(1.08)}
     }
     .opening .cover-frame{
-      box-shadow:0 22px 50px rgba(58,18,18,.22),0 0 120px rgba(255,205,84,.65), 0 0 180px rgba(255,233,162,.25);
+      transition:box-shadow 1.6s ease;
+      box-shadow:0 22px 50px rgba(58,18,18,.22),0 0 80px rgba(255,214,120,.34),0 0 150px rgba(255,232,174,.16);
     }
 
     #petals{
@@ -737,12 +781,6 @@
         <div class="copy" style="max-width:290px; margin-top:18px;">
           Join us as two hearts celebrate a beautiful promise, surrounded by love, blessings, and joyful togetherness.
         </div>
-
-        <div class="date-line" style="margin-top:20px;">
-          <span>13 September 2026</span>
-          <span>•</span>
-          <span>10 AM onwards</span>
-        </div>
       </div>
     </div>
   </section>
@@ -763,9 +801,9 @@
             <h4>Occasion</h4>
             <p>Ring Ceremony of Spandan & Rajshree</p>
           </div>
-          <div class="detail-chip">
-            <h4>When</h4>
-            <p>13 September 2026, Sunday<br/>10 AM onwards</p>
+          <div class="detail-chip celebration-note">
+            <h4>Celebration Note</h4>
+            <p>Join us for family blessings, the ring exchange, joyful moments and a warm celebration together.</p>
           </div>
         </div>
 
@@ -887,10 +925,10 @@
 
   function startIntro(){
     // Gate begins opening automatically.
-    setTimeout(() => gateStage.classList.add('opening'), 450);
+    setTimeout(() => gateStage.classList.add('opening'), 380);
 
     // Once the light burst and doors are open, remove the intro completely.
-    setTimeout(finishIntro, 2200);
+    setTimeout(finishIntro, 2850);
   }
 
   const targetDate = new Date('2026-09-13T10:00:00+05:30');
