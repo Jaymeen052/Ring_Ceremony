@@ -553,7 +553,8 @@
       transform:translateY(18px) scale(.98);
       transition:opacity .9s ease, transform .9s ease;
     }
-    .screen.active .animate-in{
+    .screen.active .animate-in,
+    .screen.visited .animate-in{
       opacity:1;
       transform:none;
     }
@@ -738,40 +739,81 @@
 <script>
   const screens = [...document.querySelectorAll('.screen')];
   const gateStage = document.getElementById('gateStage');
+
   let currentIndex = 0;
   let autoSequenceStarted = false;
+  let autoSequenceStopped = false;
+  let autoTimer = null;
 
   function markActive(index){
-    screens.forEach((screen, i) => screen.classList.toggle('active', i === index));
+    screens.forEach((screen, i) => {
+      screen.classList.toggle('active', i === index);
+    });
+
+    // Once a page has appeared, keep its content visible forever.
+    screens[index].classList.add('visited');
     currentIndex = index;
   }
 
   function goToScreen(index){
-    if(index < 0 || index >= screens.length) return;
+    if(index < 0 || index >= screens.length || autoSequenceStopped) return;
+
     markActive(index);
-    screens[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
+    screens[index].scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    });
+  }
+
+  function scheduleNext(index){
+    if(autoSequenceStopped || index >= screens.length) return;
+
+    autoTimer = setTimeout(() => {
+      if(autoSequenceStopped) return;
+
+      goToScreen(index);
+      scheduleNext(index + 1);
+    }, 3000);
   }
 
   function startSequence(){
     if(autoSequenceStarted) return;
     autoSequenceStarted = true;
 
-    setTimeout(() => gateStage.classList.add('opening'), 700);
-
+    // Gate opens automatically shortly after page load.
     setTimeout(() => {
+      if(!autoSequenceStopped) gateStage.classList.add('opening');
+    }, 450);
+
+    // Page 1 total screen time: 3 seconds.
+    autoTimer = setTimeout(() => {
+      if(autoSequenceStopped) return;
+
       goToScreen(1);
-      let next = 2;
-      const loop = () => {
-        if(next >= screens.length) return;
-        setTimeout(() => {
-          goToScreen(next);
-          next += 1;
-          loop();
-        }, 5000);
-      };
-      loop();
-    }, 6200);
+      scheduleNext(2);
+    }, 3000);
   }
+
+  function stopAutoSequence(){
+    if(autoSequenceStopped) return;
+
+    autoSequenceStopped = true;
+
+    if(autoTimer){
+      clearTimeout(autoTimer);
+      autoTimer = null;
+    }
+
+    // Make every page visible so the guest can freely scroll up/down.
+    screens.forEach(screen => screen.classList.add('visited'));
+  }
+
+  // Any real user tap/click stops the automatic sequence for this visit.
+  // Refreshing/reopening the page starts it again from the beginning.
+  document.addEventListener('pointerdown', stopAutoSequence, {
+    passive: true,
+    once: true
+  });
 
   const targetDate = new Date('2026-09-12T10:00:00+05:30');
   function updateCountdown(){
@@ -802,6 +844,7 @@
 
   window.addEventListener('load', () => {
     markActive(0);
+    screens[0].classList.add('visited');
     startSequence();
   });
 </script>
